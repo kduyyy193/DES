@@ -152,7 +152,7 @@ const Signup = () => {
                             size="small"
                             value={formik.values.email}
                             onChange={formik.handleChange}
-                            error={formik.touched.email && Boolean(formik.errors.email)}
+                            error={formik.touched.email && Boolean(formik.errors.email) || isErrorEmail}
                             helperText={formik.touched.email && formik.errors.email}
                         />
                     </FormControl>
