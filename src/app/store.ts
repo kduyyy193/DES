@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-export const store = configureStore({ 
+import userReducer from "../feartures/User/userSlice";
+import modalReducer from "../feartures/Modal/modalSlice"
+import todosReducer from "../feartures/Todos/todosSlice"
+export const store = configureStore({
     reducer: {
-        
+        user: userReducer,
+        modal: modalReducer,
+        todos: todosReducer
     }
 })
 
