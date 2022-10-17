@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
-import Navbar from "../layouts/navigation/Navbar"
+import Navbar from "../layouts/navigation/navbar"
 import Sidebar from "../layouts/sidebar/Sidebar"
 import { Children } from "../shared/interface"
 
