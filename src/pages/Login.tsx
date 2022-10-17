@@ -33,7 +33,7 @@ const Login = () => {
                 dispatch(getToken(res.data.token))
                 localStorage.setItem("token", res.data.token)
                 dispatch(getNameUser(res.data.user.name))
-                localStorage.setItem("user", res.data.user.name)
+                localStorage.setItem("name", res.data.user.name)
                 navigate("/dashboard")
             }
         }
@@ -112,7 +112,7 @@ const Login = () => {
                         <div className="mt-8">
                             <div>Not a member? <span onClick={() => navigate("/signup")} className="text-red-500/90 font-bold cursor-pointer">Sign up now</span></div>
                         </div>
-                        <Button type="submit" variant="contained" className="w-1/5 flex self-center !mt-8 !bg-red-500/70"  >
+                        <Button type="submit" variant="contained" className="!w-22 flex self-center !mt-8 !bg-red-500/70"  >
                             Log in
                         </Button>
                     </form>

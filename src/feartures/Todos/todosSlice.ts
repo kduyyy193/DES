@@ -1,6 +1,4 @@
-import { useAppSelector } from './../../app/hooks';
-import { baseURL } from './../../shared/baseURL';
-import axios from 'axios';
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Todos } from '../../shared/interface';
 
@@ -11,10 +9,18 @@ const todosSlice = createSlice({
     initialState,
     reducers: {
         postTodo: (state, action: PayloadAction<Todos>) => {
-            state.push(action.payload)
+            state.unshift(action.payload)
+        },
+        getAllTodo: (state, action: PayloadAction<Todos[]>) => {
+
+            return [...action.payload]
+        },
+        deleteTodo: (state, action: PayloadAction<number>) => {
+            const todo = state.find((todo) => todo.id === action.payload);
+            state.splice(state.indexOf(todo as Todos), 1)
         }
     }
 })
 
-export const { postTodo } = todosSlice.actions
+export const { postTodo, getAllTodo, deleteTodo } = todosSlice.actions
 export default todosSlice.reducer

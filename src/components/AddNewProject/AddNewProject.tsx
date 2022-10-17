@@ -12,9 +12,11 @@ import { Todos } from '../../shared/interface';
 
 const AddNewProject = () => {
 
-
     const token = localStorage.getItem("token")
 
+    const todosFromStore = useAppSelector(state => state.todos)
+
+    let idTodo: number
     const postTodoAPI = async (todo: Todos) => {
         try {
             const res = await axios.post((baseURL + "todos"), {
@@ -23,29 +25,23 @@ const AddNewProject = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
             if (res.data) {
-                console.log(res.data)
+                idTodo = res.data.todo.id
+                dispatch(postTodo({ content, id: idTodo }));
             }
         }
         catch (error) {
             console.log(error)
         }
     }
-
     const addTodo = () => {
         dispatch(OpenModal(false))
-        postTodoAPI({ content, date: day })
-        dispatch(postTodo({ content, date: day }));
+        postTodoAPI({ content, id: idTodo })
         setContent("")
-        setDay("")
     }
 
     const Open = useAppSelector(state => state.modal.Open)
     const dispatch = useAppDispatch()
-    const today = new Date()
-    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
     const [content, setContent] = useState("")
-    const [day, setDay] = useState("")
 
 
 
@@ -64,30 +60,24 @@ const AddNewProject = () => {
 
     return (
         <Modal open={Open} onClose={() => { dispatch(OpenModal(false)) }}>
-            <Box sx={style} className="max-w-full rounded-lg">
-                <h2 className="text-black/70 font-bold text-2xl ">
-                    Add a new project
-                </h2>
-                <div className="p-12">
-                    <div className='flex items-center '>
-                        <label htmlFor='content'>
-                            <Icons.Edit className="text-black/70 mt-2 mr-2 hover:cursor-pointer" />
-                        </label>
-                        <Input id='content' placeholder='C o n t e n t' type='text' className="w-full" value={content} onChange={(e) => setContent(e.target.value)} />
+            <form onSubmit={addTodo}>
+                <Box sx={style} className="max-w-full rounded-lg">
+                    <h2 className="text-black/70 font-bold text-2xl ">
+                        Add a new project
+                    </h2>
+                    <div className="p-12">
+                        <div className='flex items-center '>
+                            <label htmlFor='content'>
+                                <Icons.Edit className="text-black/70 mt-2 mr-2 hover:cursor-pointer" />
+                            </label>
+                            <Input id='content' autoFocus placeholder='C o n t e n t' type='text' className="w-full" value={content} onChange={(e) => setContent(e.target.value)} />
+                        </div>
                     </div>
-                    <div className='flex items-center pt-8 '>
-                        <label htmlFor='date'>
-                            <Icons.DateRange className="text-black/70 mt-2 mr-2 hover:cursor-pointer" />
-                        </label>
-
-                        <Input id='date' type='date' className="w-full" value={day} placeholder="date"
-                            onChange={(e) => setDay(e.target.value)} />
+                    <div className="text-center">
+                        <Button type='submit' className=" !bg-red-500 !text-xs !p-2 !text-white">ADD NEW PROJECT</Button>
                     </div>
-                </div>
-                <div onClick={addTodo} className="text-center">
-                    <Button className=" !bg-red-500 !text-xs !p-2 !text-white">ADD NEW PROJECT</Button>
-                </div>
-            </Box>
+                </Box>
+            </form>
         </Modal>
     )
 }

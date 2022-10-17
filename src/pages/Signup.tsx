@@ -102,7 +102,7 @@ const Signup = () => {
                     }
                 }}
             >
-                <div className="min-w-full rounded-md h-2/3 bg-black flex flex-col items-center justify-center ">
+                <div className="w-full rounded-md h-2/3 bg-black flex flex-col items-center justify-center  ">
                     <div className="font-bold mb-12">
                         You have made successful accounts <Icons.Check color="success" />
                     </div>
@@ -175,7 +175,7 @@ const Signup = () => {
                         <div className="mt-8">
                             <div>Already a member?  <span onClick={() => navigate("/login")} className="text-red-500/90 font-bold cursor-pointer">Sign In</span></div>
                         </div>
-                        <Button type="submit" variant="contained" className="w-1/5 flex self-center !mt-8 !bg-red-500/70"  >
+                        <Button type="submit" variant="contained" className="!w-22 flex self-center !mt-8 !bg-red-500/70"  >
                             Sign up
                         </Button>
                     </form>

@@ -11,11 +11,11 @@ const Sidebar = () => {
     const dispatch = useAppDispatch()
 
     return (
-        <div id="sidebar">
-            <div className="w-72 h-screen p-8 flex flex-col items-center  bg-black-500/70 border-r border-red-500 transit">
+        <div id="sidebar" className='h-full min-h-screen '>
+            <div className="w-72 h-full  p-8 flex flex-col items-center  bg-black-500/70 border-r border-red-500 transit">
                 <div>
                     <div >
-                        <img className="rounded-full w-40 h-40  border-white border-2 object-cover" src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.6435-9/193464204_100375608965467_3042561662570842452_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=174925&_nc_ohc=KBCJJ9YlIkUAX-1Ppp6&_nc_ht=scontent.fsgn5-2.fna&oh=00_AT_lcc8yhkIU8WEVO8SikU3Bk_d-KjSAbW3FJ9UerNoVgA&oe=636B6E01" alt="Error" />
+                        <img className="rounded-full w-40 h-40  border-white border-2 object-cover" src="https://picsum.photos/200/300" alt="Error" />
                     </div>
                     <div className='text-center font-black tracking-wider font-sans text-sm py-4'>
                         {name || localStorage.getItem("name")}

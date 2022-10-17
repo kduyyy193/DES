@@ -8,7 +8,9 @@ import Settings from '@mui/icons-material/Settings';
 import Add from '@mui/icons-material/AddCircle';
 import Edit from '@mui/icons-material/Edit';
 import DateRange from '@mui/icons-material/DateRange';
-const Icons = { 
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import Trash from '@mui/icons-material/Delete';
+const Icons = {
   Menu,
   Logout,
   Dashboard,
@@ -18,6 +20,8 @@ const Icons = {
   Settings,
   Add,
   Edit,
-  DateRange
+  DateRange,
+  DragIndicatorIcon,
+  Trash
 }
 export default Icons

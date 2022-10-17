@@ -16,6 +16,13 @@ export interface OnClick {
 }
 
 export interface Todos {
+    id?: number,
     content: string,
-    date: string,
+    color?: string,
+    status?: Status,
+}
+
+export interface Status {
+    status: string;
+    color: string;
 }

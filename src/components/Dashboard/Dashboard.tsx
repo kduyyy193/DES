@@ -1,12 +1,48 @@
 import { Button } from '@mui/material'
+import axios from 'axios'
+import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { OpenModal } from '../../feartures/Modal/modalSlice'
+import { getAllTodo, postTodo } from '../../feartures/Todos/todosSlice'
+import { baseURL } from '../../shared/baseURL'
+import { Status, Todos } from '../../shared/interface'
 import Icons from '../Icons'
+import ViewTodos from '../ViewTodos/ViewTodos'
 
 const Dashboard = () => {
 
+  const token = localStorage.getItem("token")
+
   const dispatch = useAppDispatch()
-  const todos = useAppSelector(state => state.todos)
+  const AllTodos = useAppSelector(state => state.todos)
+
+  const todosAPI = async () => {
+    try {
+      const res = await axios.get((baseURL + "todos"), {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      if (res.data.todos) {
+        dispatch(getAllTodo(res.data.todos))
+      }
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  const effectRan = useRef(false)
+
+  useEffect(() => {
+    if (effectRan.current == false) {
+      todosAPI()
+      return () => {
+        effectRan.current = true
+      }
+    }
+
+
+  }, [])
+
 
   return (
     <div id='dashboard'>
@@ -23,7 +59,7 @@ const Dashboard = () => {
             <Icons.Add className="text-red-500  hover:cursor-pointer" onClick={() => { dispatch(OpenModal(true)) }} />
           </Button>
         </div>
-        {!todos &&
+        {!AllTodos &&
           <div className="text-center">
             <h2 className='text-3xl font-semibold'>Nothing here 😔</h2>
             <div onClick={() => { dispatch(OpenModal(true)) }}>
@@ -31,8 +67,11 @@ const Dashboard = () => {
             </div>
           </div>
         }
-        <div>
-
+        <div className='mt-8'>
+          {
+            AllTodos?.map(todo => <ViewTodos id={todo.id} key={todo.id} content={todo.content} color={todo.color} />
+            )
+          }
         </div>
       </div>
     </div>

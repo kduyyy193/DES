@@ -11,7 +11,8 @@ const Navbar = ({ onClick }: OnClick) => {
   const logout = () => {
     navigate("/login")
     dispatch(removeToken())
-    localStorage.removeItem("token")
+    localStorage.clear()
+    location.reload()
   }
 
   const navigate = useNavigate()

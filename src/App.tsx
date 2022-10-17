@@ -8,6 +8,7 @@ import Settings from "./components/Settings/Settings"
 import { Routes, Route, Navigate } from "react-router-dom"
 import { useAppSelector } from './app/hooks'
 import AddNewProject from './components/AddNewProject/AddNewProject'
+import MainPageResponsive from './pages/MainPageResponsive'
 
 const App = () => {
   const token = useAppSelector(state => state.user.token) || localStorage.getItem("token")
@@ -18,6 +19,7 @@ const App = () => {
         {token &&
           <Route>
             <Route path="/" element={<MainPage children={<Dashboard />} />} />
+            <Route path="/respon" element={<MainPage children={<MainPageResponsive />} />} />
             <Route path="/login" element={<Navigate replace to="/dashboard" />} />
             <Route path="/signup" element={<Navigate replace to="/dashboard" />} />
             <Route path="/dashboard" element={<MainPage children={<Dashboard />} />} />
